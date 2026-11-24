@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-sholat-diary-v4';
+const CACHE_NAME = 'my-sholat-diary-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -1045,8 +1045,6 @@ function initApp() {
   fetchPrayerTimes(currentDateStr);
   setInterval(updateCountdownAndCheckAlarm, 1000);
 }
-
-document.addEventListener('DOMContentLoaded', initApp);
 // === FITUR TAB DOA & DZIKIR HARIAN ===
 // === FITUR TAB DOA & DZIKIR HARIAN ===
 const DOA_COLLECTION = [
