@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#718879" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="My Sholat Diary" />
+  <title>My Sholat Diary — Little Steps, Better Ibadah Every Day</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Desktop Sidebar Navigation -->
+    <aside class="desktop-sidebar">
+      <div class="brand-box">
+        <div class="logo-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">My Sholat Diary</h1>
+          <p class="brand-tagline">Little Steps, Better Ibadah Every Day.</p>
+        </div>
+      </div>
+
+      <nav class="desktop-nav">
+        <button class="nav-btn active" data-target="view-beranda">
+          <span class="nav-icon">🕌</span> Beranda
+        </button>
+        <button class="nav-btn" data-target="view-tracker">
+          <span class="nav-icon">✨</span> Tracker Ibadah
+        </button>
+        <button class="nav-btn" data-target="view-doa">
+          <span class="nav-icon">🤲</span> Doa & Dzikir
+        </button>
+        <button class="nav-btn" data-target="view-kalender">
+          <span class="nav-icon">📅</span> Kalender Ibadah
+        </button>
+        <button class="nav-btn" data-target="view-statistik">
+          <span class="nav-icon">📊</span> Statistik & Rekap
+        </button>
+        <button class="nav-btn" data-target="view-jurnal">
+          <span class="nav-icon">📖</span> Jurnal Ibadah
+        </button>
+        <button class="nav-btn" data-target="view-pengaturan">
+          <span class="nav-icon">⚙️</span> Pengaturan
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Top Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <div class="header-logo">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="#F8F7EF">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="app-title">My Sholat Diary</h1>
+            <p class="app-greeting" id="headerGreeting">Assalamualaikum, semangat ibadah hari ini!</p>
+          </div>
+        </div>
+        <button class="icon-btn" id="btnOpenSettings" aria-label="Pengaturan" title="Pengaturan">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Offline Banner -->
+      <div id="offlineBanner" class="offline-banner hidden">
+        <span>📡 Mode Offline: Menggunakan jadwal tersimpan. Jadwal belum diperbarui karena tidak ada internet.</span>
+      </div>
+
+      <!-- Audio Unlock Notice Banner (Autoplay Policy Compliance) -->
+      <div id="audioActivateBanner" class="audio-banner">
+        <span>🔔 Ketuk untuk mengaktifkan suara pengingat azan di browser sesi ini.</span>
+        <button id="btnUnlockAudio" class="btn-small">Aktifkan Suara</button>
+      </div>
+
+      <!-- ================= VIEW 1: BERANDA ================= -->
+      <main id="view-beranda" class="view-section active">
+        <!-- Date & Location Card -->
+        <section class="card date-location-card">
+          <div class="date-info">
+            <p class="masehi-date" id="displayMasehi">Memuat tanggal...</p>
+            <p class="hijri-date" id="displayHijri">Memuat tanggal Hijriah...</p>
+          </div>
+          <div class="location-pill" id="btnQuickLocation" title="Ubah lokasi">
+            <span>📍</span>
+            <span id="displayLocation">Jakarta, Indonesia</span>
+          </div>
+        </section>
+
+        <!-- Hero Prayer Countdown Card -->
+        <section class="card hero-countdown">
+          <div class="hero-decor-moon">🌙</div>
+          <div class="hero-decor-star">✦</div>
+          <p class="countdown-label" id="nextPrayerLabel">Menuju Sholat Berikutnya</p>
+          <h2 class="countdown-timer" id="countdownTimer">--:--:--</h2>
+          <p class="countdown-sub" id="countdownSub">Menghitung jadwal sholat...</p>
+          <div class="hero-mini-progress">
+            <span id="heroProgressText">0/5 Sholat Wajib Selesai</span>
+            <div class="mini-bar-bg">
+              <div class="mini-bar-fill" id="heroProgressBar" style="width: 0%"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5 Daily Prayers Schedule -->
+        <section class="section-block">
+          <div class="section-header">
+            <h3>Jadwal Sholat Hari Ini</h3>
+            <span class="method-badge" id="displayMethodBadge">Kemenag RI</span>
+          </div>
+          <div id="prayerLoading" class="loading-box hidden">
+            <div class="spinner"></div>
+            <p>Mengambil jadwal sholat akurat...</p>
+          </div>
+          <div class="prayer-list" id="dashboardPrayerList">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+        </section>
+      </main>
+
+      <!-- ================= VIEW 2: TRACKER IBADAH ================= -->
+      <main id="view-tracker" class="view-section">
+        <div class="page-intro">
+          <h2>Tracker Ibadah Harian</h2>
+          <div class="date-switcher">
+            <button id="btnPrevTrackerDate" class="btn-circle" aria-label="Hari sebelumnya">‹</button>
+            <span id="trackerDateLabel" class="current-date-pill">Hari Ini</span>
+            <button id="btnNextTrackerDate" class="btn-circle" aria-label="Hari berikutnya">›</button>
+          </div>
+        </div>
+
+        <!-- Daily Fardhu Progress Card -->
+        <section class="card progress-card">
+          <div class="progress-header">
+            <span class="progress-quote" id="trackerMotivationText">Alhamdulillah, mari mulai langkah ibadah hari ini!</span>
+            <span class="progress-percent" id="trackerPercent">0%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="trackerProgressBar" style="width: 0%"></div>
+          </div>
+          <p class="progress-caption">Klik status pada setiap sholat untuk mengubah (Sudah / Belum / Terlewat).</p>
+        </section>
+
+        <!-- Wajib Checklist -->
+        <section class="section-block">
+          <h3>Sholat Wajib (5 Waktu)</h3>
+          <div class="wajib-tracker-list" id="wajibTrackerList">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+        </section>
+
+        <!-- Sunnah Checklist -->
+        <section class="section-block">
+          <div class="section-header">
+            <h3>Amalan Sunnah Harian</h3>
+            <span class="badge-soft" id="sunnahCountBadge">0/9 Amalan</span>
+          </div>
+          <div class="sunnah-grid" id="sunnahTrackerList">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+        </section>
+      </main>
+
+      <!-- ================= VIEW: DOA & DZIKIR HARIAN ================= -->
+      <main id="view-doa" class="view-section">
+        <div class="page-intro">
+          <h2>Doa & Dzikir Harian</h2>
+          <p class="subtitle">Bacaan doa dhuha, dzikir pagi petang, & amalan jalur langit.</p>
+        </div>
+
+        <!-- Filter Kategori -->
+        <div class="doa-filter-scroll">
+          <button class="filter-chip active" data-category="semua">Semua</button>
+          <button class="filter-chip" data-category="dhuha">Doa Dhuha</button>
+          <button class="filter-chip" data-category="dzikir">Dzikir Pagi & Petang</button>
+          <button class="filter-chip" data-category="jalur-langit">Amalan Jalur Langit</button>
+        </div>
+
+        <!-- Daftar Kartu Doa (diisi otomatis via app.js) -->
+        <div id="doaListContainer" class="doa-list"></div>
+      </main>
+
+      <!-- ================= VIEW 3: KALENDER IBADAH ================= -->
+      <main id="view-kalender" class="view-section">
+        <div class="page-intro">
+          <h2>Kalender Konsistensi</h2>
+          <p class="subtitle">Pantau jejak ibadahmu setiap bulan.</p>
+        </div>
+
+        <section class="card calendar-card">
+          <div class="calendar-header">
+            <button id="btnPrevMonth" class="btn-circle" aria-label="Bulan sebelumnya">‹</button>
+            <h3 id="calendarMonthTitle">November 2026</h3>
+            <button id="btnNextMonth" class="btn-circle" aria-label="Bulan berikutnya">›</button>
+          </div>
+
+          <div class="calendar-weekdays">
+            <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+
+          <div class="calendar-legend">
+            <div class="legend-item"><span class="dot dot-green"></span> 5 Sholat Lengkap</div>
+            <div class="legend-item"><span class="dot dot-yellow"></span> Sebagian (1–4)</div>
+            <div class="legend-item"><span class="dot dot-neutral"></span> Belum Ada Catatan</div>
+          </div>
+        </section>
+
+        <!-- Detail Tanggal Terpilih -->
+        <section class="card day-detail-card" id="calendarDayDetail">
+          <h3 id="detailDateTitle">Detail Ibadah</h3>
+          <div id="detailDateContent">
+            <p class="empty-text">Klik salah satu tanggal pada kalender untuk melihat rekap ibadah.</p>
+          </div>
+        </section>
+      </main>
+
+      <!-- ================= VIEW 4: STATISTIK ================= -->
+      <main id="view-statistik" class="view-section">
+        <div class="page-intro">
+          <h2>Statistik & Rekap Ibadah</h2>
+          <p class="subtitle">Data dihitung langsung dari catatan ibadahmu.</p>
+        </div>
+
+        <!-- Ringkasan Angka Utama -->
+        <section class="stats-grid">
+          <div class="card stat-box">
+            <span class="stat-icon">🕌</span>
+            <h4 class="stat-value" id="statTotalWajib">0</h4>
+            <p class="stat-label">Total Sholat Wajib</p>
+          </div>
+          <div class="card stat-box">
+            <span class="stat-icon">🌿</span>
+            <h4 class="stat-value" id="statConsistency">0%</h4>
+            <p class="stat-label">Konsistensi Sholat</p>
+          </div>
+          <div class="card stat-box">
+            <span class="stat-icon">⭐</span>
+            <h4 class="stat-value" id="statPerfectDays">0</h4>
+            <p class="stat-label">Hari Lengkap (5/5)</p>
+          </div>
+          <div class="card stat-box">
+            <span class="stat-icon">🌸</span>
+            <h4 class="stat-value" id="statTotalSunnah">0</h4>
+            <p class="stat-label">Total Amalan Sunnah</p>
+          </div>
+        </section>
+
+        <!-- Grafik 7 Hari -->
+        <section class="card chart-card">
+          <h3>Aktivitas Sholat 7 Hari Terakhir</h3>
+          <div class="bar-chart-7" id="chart7Days">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+        </section>
+
+        <!-- Grafik 30 Hari -->
+        <section class="card chart-card">
+          <h3>Tren Konsistensi 30 Hari Terakhir</h3>
+          <div class="heatmap-30" id="chart30Days">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+          <p class="chart-note">Setiap kotak mewakili 1 hari dalam 30 hari terakhir (semakin pekat hijau = semakin lengkap sholatnya).</p>
+        </section>
+
+        <!-- Rekap Per Waktu Sholat -->
+        <section class="card chart-card">
+          <h3>Rekap Sholat Berdasarkan Waktu</h3>
+          <div class="time-breakdown" id="prayerTimeBreakdown">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+        </section>
+      </main>
+
+      <!-- ================= VIEW 5: JURNAL IBADAH ================= -->
+      <main id="view-jurnal" class="view-section">
+        <div class="page-intro">
+          <h2>Jurnal Ibadah & Syukur</h2>
+          <div class="date-switcher">
+            <button id="btnPrevJournalDate" class="btn-circle" aria-label="Tanggal sebelumnya">‹</button>
+            <span id="journalDateLabel" class="current-date-pill">Hari Ini</span>
+            <button id="btnNextJournalDate" class="btn-circle" aria-label="Tanggal berikutnya">›</button>
+          </div>
+        </div>
+
+        <section class="card diary-paper">
+          <div class="diary-header-decor">
+            <span>🌸 Lembar Refleksi Harian</span>
+            <span id="journalSavedStatus" class="saved-tag">Belum disimpan</span>
+          </div>
+
+          <form id="journalForm" class="diary-form">
+            <div class="form-group">
+              <label for="journalGratitude">🌿 Apa yang aku syukuri hari ini?</label>
+              <textarea id="journalGratitude" rows="2" placeholder="Tuliskan nikmat kecil atau besar yang kamu rasakan hari ini..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="journalDua">🤲 Doa yang ingin aku panjatkan</label>
+              <textarea id="journalDua" rows="2" placeholder="Tuliskan harapan dan munajat terbaikmu kepada Allah..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="journalTarget">🎯 Target ibadah hari ini</label>
+              <input type="text" id="journalTarget" placeholder="Contoh: Tilawah 2 halaman, Dhuha 4 rakaat, jaga lisan..." />
+            </div>
+
+            <div class="form-group">
+              <label for="journalReflection">✍️ Catatan refleksi diri</label>
+              <textarea id="journalReflection" rows="3" placeholder="Bagaimana kualitas kekhusyukan sholat dan hatimu hari ini?"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary full-width">Simpan Catatan Jurnal</button>
+          </form>
+        </section>
+
+        <!-- Riwayat Jurnal -->
+        <section class="section-block">
+          <h3>Riwayat Lembar Jurnal</h3>
+          <div id="journalHistoryList" class="journal-history-list">
+            <!-- Diisi otomatis via app.js -->
+          </div>
+        </section>
+      </main>
+
+      <!-- ================= VIEW 6: PENGATURAN ================= -->
+      <main id="view-pengaturan" class="view-section">
+        <div class="page-intro">
+          <h2>Pengaturan Aplikasi</h2>
+          <p class="subtitle">Sesuaikan lokasi, pengingat azan, dan cadangan data.</p>
+        </div>
+
+        <!-- Lokasi & Metode -->
+        <section class="card settings-card">
+          <h3>📍 Lokasi & Jadwal Sholat</h3>
+          <div class="setting-row">
+            <div>
+              <strong>Gunakan Lokasi GPS Otomatis</strong>
+              <p class="small-muted" id="gpsCoordText">Koordinat: -6.1751, 106.8650</p>
+            </div>
+            <button id="btnDetectGPS" class="btn-secondary">Deteksi GPS</button>
+          </div>
+
+          <div class="form-group mt-12">
+            <label for="manualCityInput">Atau Cari Kota Secara Manual</label>
+            <div class="input-with-btn">
+              <input type="text" id="manualCityInput" placeholder="Contoh: Bandung, Surabaya, Yogyakarta..." />
+              <button id="btnSearchCity" class="btn-primary">Cari</button>
+            </div>
+          </div>
+
+          <div class="form-group mt-12">
+            <label for="calcMethodSelect">Metode Perhitungan Jadwal</label>
+            <select id="calcMethodSelect">
+              <option value="20">Kementerian Agama Republik Indonesia (Kemenag)</option>
+              <option value="11">Majlis Ugama Islam Singapura (MUIS)</option>
+              <option value="17">JAKIM (Malaysia)</option>
+              <option value="3">Muslim World League (MWL)</option>
+              <option value="4">Umm Al-Qura University, Makkah</option>
+              <option value="2">Islamic Society of North America (ISNA)</option>
+              <option value="5">Egyptian General Authority of Survey</option>
+            </select>
+          </div>
+
+          <div class="setting-row mt-12">
+            <div>
+              <strong>Format Waktu</strong>
+              <p class="small-muted">Pilih tampilan jam 24 jam atau 12 jam (AM/PM)</p>
+            </div>
+            <select id="timeFormatSelect" class="compact-select">
+              <option value="24">24 Jam</option>
+              <option value="12">12 Jam</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Pengaturan Pengingat Azan -->
+        <section class="card settings-card">
+          <h3>🔔 Pengingat & Audio Azan</h3>
+
+          <div class="setting-row">
+            <div>
+              <strong>Notifikasi Browser</strong>
+              <p class="small-muted" id="notifPermissionStatus">Status: Belum diizinkan</p>
+            </div>
+            <button id="btnRequestNotif" class="btn-secondary">Izinkan Notifikasi</button>
+          </div>
+
+          <div class="form-group mt-12">
+            <label for="azanAudioSelect">Pilihan Suara Azan / Pengingat</label>
+            <select id="azanAudioSelect">
+              <option value="makkah">Azan Makkah (Al-Haram)</option>
+              <option value="madinah">Azan Madinah (An-Nabawi)</option>
+              <option value="soft_chime">Nada Pengingat Lembut (Tanpa Vokal)</option>
+            </select>
+          </div>
+
+          <div class="form-group mt-12">
+            <label for="azanVolumeRange">Volume Audio (<span id="volumePercentLabel">80%</span>)</label>
+            <input type="range" id="azanVolumeRange" min="0" max="1" step="0.05" value="0.8" />
+          </div>
+
+          <div class="audio-test-controls">
+            <button id="btnTestAzan" class="btn-primary">▶ Tes Suara Azan</button>
+            <button id="btnStopAzan" class="btn-secondary">⏹ Hentikan</button>
+          </div>
+
+          <div class="reminder-toggles mt-16">
+            <p class="label-title">Aktifkan Pengingat Per Waktu Sholat:</p>
+            <div id="perPrayerReminderList" class="toggle-list">
+              <!-- Diisi otomatis via app.js -->
+            </div>
+          </div>
+
+          <div class="browser-limit-note mt-12">
+            <strong>ℹ️ Catatan Teknis Pengingat Browser:</strong>
+            <p>Sesuai kebijakan keamanan browser modern (Chrome/Safari), audio azan otomatis dapat berbunyi saat tab aplikasi terbuka atau aktif di layar setelah kamu menekan tombol <em>Aktifkan Suara / Tes Suara</em>. Jika browser ditutup total atau ponsel terkunci lama, sistem operasi dapat menangguhkan audio web.</p>
+          </div>
+        </section>
+
+        <!-- Tampilan & Tema -->
+        <section class="card settings-card">
+          <h3>🎨 Tampilan & Nuansa</h3>
+          <div class="setting-row">
+            <div>
+              <strong>Tema Warna Aplikasi</strong>
+              <p class="small-muted">Pilih nuansa aesthetic yang paling menenangkan</p>
+            </div>
+            <select id="themeSelect" class="compact-select">
+              <option value="sage">Sage Cream (Default)</option>
+              <option value="beige">Warm Soft Beige</option>
+              <option value="night">Calm Evening Sage</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Backup & Restore Data -->
+        <section class="card settings-card">
+          <h3>💾 Cadangkan & Pulihkan Data</h3>
+          <p class="small-muted mb-12">Semua data tersimpan lokal di perangkatmu. Ekspor ke JSON secara berkala agar aman saat ganti perangkat.</p>
+          <div class="backup-buttons">
+            <button id="btnExportData" class="btn-secondary">⬇ Ekspor Backup (JSON)</button>
+            <label class="btn-secondary file-label">
+              ⬆ Impor Backup (JSON)
+              <input type="file" id="importDataInput" accept=".json" hidden />
+            </label>
+          </div>
+          <hr class="divider" />
+          <button id="btnResetAllData" class="btn-danger full-width">🗑️ Reset Seluruh Data Aplikasi</button>
+        </section>
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav-item active" data-target="view-beranda">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Beranda</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-tracker">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Tracker</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-doa">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 10c2-2 5-2 7 0 2-2 5-2 7 0"/><path d="M5 16c2-2 5-2 7 0 2-2 5-2 7 0"/></svg>
+        <span>Doa</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-kalender">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Kalender</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-statistik">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Statistik</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-jurnal">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Jurnal</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Azan Ringing Modal -->
+  <div id="azanModal" class="modal-overlay hidden">
+    <div class="modal-card azan-modal-card">
+      <div class="azan-moon-pulse">🕌</div>
+      <p class="azan-subtitle">Telah Masuk Waktu Sholat</p>
+      <h2 id="azanModalPrayerName" class="azan-title">Dzuhur</h2>
+      <p id="azanModalTime" class="azan-time">12:00</p>
+      <p class="azan-doa">"Hayya 'alash sholah, hayya 'alal falah..."</p>
+      <div class="modal-actions">
+        <button id="btnAzanDone" class="btn-primary">Tandai Sudah Sholat</button>
+        <button id="btnAzanDismiss" class="btn-secondary">Matikan Alarm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Tersimpan!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
