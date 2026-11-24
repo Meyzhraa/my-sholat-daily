@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-sholat-diary-v3';
+const CACHE_NAME = 'my-sholat-diary-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -32,7 +32,7 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Untuk API Aladhan, utamakan jaringan (Network First), fallback ke cache jika offline
+  // Untuk API Aladhan
   if (event.request.url.includes('api.aladhan.com')) {
     event.respondWith(
       fetch(event.request)
@@ -46,10 +46,16 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Untuk aset aplikasi, utamakan cache (Cache First)
+  // Network First untuk aset aplikasi agar update kode langsung terbaca
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request).catch(() => caches.match('./index.html'));
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        const cloned = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
+        return networkResponse;
+      })
+      .catch(() => {
+        return caches.match(event.request).then((cached) => cached || caches.match('./index.html'));
+      })
   );
 });
